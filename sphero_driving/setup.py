@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'subtest = sphero_driving.subtest:main',
             'drive = sphero_driving.drive:main',
+            'sensors_pub = sphero_driving.sensors_pub:main',
         ],
     },
 )
