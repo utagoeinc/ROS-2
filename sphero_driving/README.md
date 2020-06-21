@@ -77,3 +77,8 @@ Set the Topic `/cmd_vel`.
 # Issue
 You can't exit spin loop properly.
 This issue is under investigating.
+
+## Countermeasures
+1. Suspend the process with <kbd>Ctrl + Z</kbd>.
+2. Check the job ID number of the process by `$ jobs`.
+3. Kill the process by `$ kill %<jobID>`

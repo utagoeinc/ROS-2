@@ -4,7 +4,18 @@ from typing import Dict
 from pysphero.core import Sphero
 from pysphero.device_api.sensor import CoreTime, Quaternion
 
+
+flag = True
 x = 0.0
+
+import signal
+def signalHandlerCallback(sig_no, frame):
+    global flag
+    print('Signal catch.')
+    flag = False
+signal.signal(signal.SIGINT, signalHandlerCallback)
+
+
 
 def notify_callback(data: Dict):
     # info = ", ".join("{:1.2f}".format(data.get(param)) for param in Quaternion)
@@ -16,15 +27,20 @@ def notify_callback(data: Dict):
 
 
 def main():
-    global x
+    global x, flag
     mac_address = "d6:bc:6a:05:79:b6"
     with Sphero(mac_address=mac_address) as sphero:
         sphero.power.wake()
         sphero.sensor.set_notify(notify_callback, CoreTime, Quaternion)
-        for i in range(10):
+
+    print('start')
+    # for i in range(10):
+    while True:
+        if(flag):
             print("x: {0}".format(x))
             sleep(1)
         # sleep(5)
+    with Sphero(mac_address=mac_address) as sphero:
         sphero.sensor.cancel_notify_sensors()
         sphero.power.enter_soft_sleep()
 

@@ -23,6 +23,7 @@ setup(
             'subtest = sphero_driving.subtest:main',
             'drive = sphero_driving.drive:main',
             'sensors_pub = sphero_driving.sensors_pub:main',
+            'test_sensors_pub = sphero_driving.test_sensors_pub:main',
         ],
     },
 )
